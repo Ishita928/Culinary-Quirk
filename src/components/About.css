@@ -1,0 +1,48 @@
+.chef{
+border-radius: 50%;
+margin-left: 33rem;
+
+
+}
+.text{
+    position: fixed;
+    color: rgb(117, 109, 109);
+    font-size: larger;
+   margin-top: 2rem;
+    font-style: italic;
+    margin-left: 2rem;
+    width: 35%;
+    cursor: pointer;
+   
+}
+
+@media (max-width: 600px) {
+    .text {
+        font-size: 10px;
+        margin-left: -10rem;
+    }
+}
+.textt{
+  position: fixed;
+    color: grey;
+    font-size: larger;
+    font-style: italic;
+    cursor: pointer;
+    margin-top: 15rem;
+    width: 35%;
+    margin-left:51rem;
+
+}
+
+@media (max-width: 600px) {
+    .textt {
+        font-size: 10px;
+        margin-left: 10rem;
+    }
+}
+
+.spoon{
+    border-radius: 50%;
+    margin-left: 35%;
+    
+}

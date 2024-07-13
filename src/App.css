@@ -1,0 +1,7 @@
+/* write your css here */
+.base{
+    background: linear-gradient(to right, #434343 0%, black 100%);
+min-height:100vh;
+
+width: 100vw;
+}

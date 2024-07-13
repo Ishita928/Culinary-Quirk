@@ -1,0 +1,22 @@
+.star {
+    cursor: pointer;
+  }
+  
+  .star:hover,
+  .star:hover ~ .star {
+    color: #ffc107; /* Yellow color when hovered */
+  }
+  
+  input[type="radio"] {
+    display: none; /* Hide the radio input */
+  }
+  .star-container {
+    display: flex;
+    align-items: center;
+    gap:0.7rem;
+    margin-left: 4rem;
+    margin-top: 1rem;
+  }
+  .star:last-child {
+    margin-right: 0; /* Remove margin from the last star */
+  }
