@@ -30,7 +30,7 @@ const Recipe = () => {
 return (
   <>
       <h1 className='head font-thin italic '>"Unlock the chef within you – find recipes that inspire and delight" </h1>
-      <div className=' absolute ml-[60rem] mt-[-1rem] lg:flex hidden' style={{width:"10%"}}>
+      <div className=' absolute ml-[60rem] mt-[-1rem] lg:flex hidden ' style={{width:"10%"}}>
       <Lottie animationData={gif}/>
       </div>
       <div className='container'>
@@ -39,7 +39,7 @@ return (
               <button onClick={myFun}>Search</button>
           </div>
           <h4 className='msg'>{msg}</h4>
-          <div>
+          <div className='flex justify-center items-center flex-wrap gap-4 mb-[-1px]'>
           <Mealcards detail={data}/>
           </div>
       </div>

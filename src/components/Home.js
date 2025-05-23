@@ -7,7 +7,7 @@ import "./Home.css";
 
 const Home = () => {
   return (
-    <div className='flex flex-col lg:flex-row gap-10 '>
+    <div className='flex flex-col lg:flex-row gap-10'>
       <div className='leftpage lg:w-1/2 p-4'>
         <div className='text-zinc-50 title'>
           <p className='mt-[-6rem]'>Welcome to</p>
@@ -49,7 +49,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className='lg:mt-[-20rem] lg:flex hidden' style={{width:"40%"}}>
+      <div className='lg:mt-[-20rem] lg:flex hidden ' style={{width:"40%"}}>
         <Lottie animationData={gif} />
       </div>
     </div>

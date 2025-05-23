@@ -12,7 +12,7 @@ const TechniquesDetails = ({ cookingTechniques }) => {
   }
 
   return (
-    <div className="technique-detail relative">
+    <div className="technique-detail relative mb-[-1px]">
 
       <div className='absolute ml-[38rem] mt-[-5rem] lg:flex hidden' style={{width:"35%"}}>
       <Lottie animationData={gif}/>
