@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useForm, ValidationError } from '@formspree/react';
-import StarRating from './StarRating'; // Adjust the path as per your actual file location
+import StarRating from './StarRating';
 import coffee from "../assets/coffee.jpg";
 import contact from "../assets/contact.png";
+
 function Phone() {
   const [state, handleSubmit] = useForm("xldrdbgl");
   const [submitted, setSubmitted] = useState(false);
@@ -13,14 +14,36 @@ function Phone() {
     address: '',
     review: ''
   });
-  const [rating, setRating] = useState(0); // State for rating
+  const [rating, setRating] = useState(0);
+  const [errors, setErrors] = useState({}); // Added validation state
+
+  // Added validation function
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.firstname.trim()) newErrors.firstname = "Required";
+    if (!formData.lastname.trim()) newErrors.lastname = "Required";
+    if (!formData.phone.trim()) newErrors.phone = "Required";
+    if (!formData.address.trim()) newErrors.address = "Required";
+    if (!formData.review.trim()) newErrors.review = "Required";
+    if (rating === 0) newErrors.rating = "Required";
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    // Clear error when typing
+    if (errors[e.target.name]) {
+      setErrors(prev => ({ ...prev, [e.target.name]: undefined }));
+    }
   };
 
   const handleRatingChange = (newRating) => {
     setRating(newRating);
+    if (errors.rating) {
+      setErrors(prev => ({ ...prev, rating: undefined }));
+    }
   };
 
   const handleResubmit = () => {
@@ -32,16 +55,17 @@ function Phone() {
       address: '',
       review: ''
     });
-    setRating(0); // Reset rating field
+    setRating(0);
+    setErrors({}); // Clear errors on resubmit
   };
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) return; // Added validation check
 
     try {
       await handleSubmit(e);
       setSubmitted(true);
-      // Optionally, clear form fields after successful submission
       setFormData({
         firstname: '',
         lastname: '',
@@ -49,7 +73,7 @@ function Phone() {
         address: '',
         review: ''
       });
-      setRating(0); // Clear rating field upon submission
+      setRating(0);
     } catch (error) {
       console.error(error);
     }
@@ -79,6 +103,7 @@ function Phone() {
                 placeholder="Enter your first name"
                 className="mt-1 block p-1 w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               />
+              {errors.firstname && <p className="text-red-500 text-xs">Required</p>}
               <ValidationError 
                 prefix="First name" 
                 field="firstname"
@@ -97,6 +122,7 @@ function Phone() {
                 placeholder="Enter your last name"
                 className="mt-1 block p-1 w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               />
+              {errors.lastname && <p className="text-red-500 text-xs">Required</p>}
               <ValidationError 
                 prefix="Last name" 
                 field="lastname"
@@ -117,6 +143,7 @@ function Phone() {
               placeholder="Enter your phone number"
               className="mt-1 block w-full p-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             />
+            {errors.phone && <p className="text-red-500 text-xs">Required</p>}
             <ValidationError 
               prefix="Phone" 
               field="phone"
@@ -136,6 +163,7 @@ function Phone() {
               className="mt-1 block w-full p-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               rows="3"
             />
+            {errors.address && <p className="text-red-500 text-xs">Required</p>}
             <ValidationError 
               prefix="Address" 
               field="address"
@@ -155,6 +183,7 @@ function Phone() {
               className="mt-1 block w-full p-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               rows="3"
             />
+            {errors.review && <p className="text-red-500 text-xs">Required</p>}
             <ValidationError 
               prefix="Review" 
               field="review"
@@ -166,6 +195,7 @@ function Phone() {
           <div className='mt-0 flex '>
             <label htmlFor="rating" className="block text-yellow-200">Rating:</label>
             <StarRating rating={rating} onRatingChange={handleRatingChange} className='mt-[-2rem]' />
+            {errors.rating && <p className="text-red-500 text-xs ml-2">Required</p>}
           </div>
 
           <button type="submit" disabled={state.submitting} className=" bg-yellow-600 hover:bg-yellow-700 mt-4 text-white font-bold py-2 px-4 rounded">
@@ -176,11 +206,7 @@ function Phone() {
             <img src={contact} width="150rem" className='mt-[-1rem]' />
             <img src={coffee} width="300rem" className='rounded-full lg:flex hidden mt-[-2rem]' />
           </div>
-          
-
         </form>
-
-       
       )}
     </div>
   );
