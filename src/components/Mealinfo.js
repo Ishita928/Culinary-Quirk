@@ -13,11 +13,11 @@ const Mealinfo = () => {
                 if (jsonData.meals && jsonData.meals.length > 0) {
                     setInfo(jsonData.meals[0]);
                 } else {
-                    setInfo(null); // handle case where meal is not found
+                    setInfo(null); 
                 }
             } catch (error) {
                 console.error('Error fetching meal data:', error);
-                setInfo(null); // handle error case
+                setInfo(null); 
             }
         };
 
